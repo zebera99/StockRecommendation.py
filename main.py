@@ -54,11 +54,28 @@ QQQ_profit6 = profit(price('qqq',today), price('qqq',mo(6)))
 QQQ_profit12 = profit(price('qqq',today), price('qqq',mo(12)))
 QQQ_momentum_score = round((QQQ_profit1*12 + QQQ_profit3*4 + QQQ_profit6*2 + QQQ_profit12)/100,3)
 
+#안전 자산(12개월 평균가)
+TIP_12_average = round(web.get_data_yahoo('TIP', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('TIP', start=today - timedelta(days=364),end = today)['Close']),2)
+
+DBC_12_average = round(web.get_data_yahoo('DBC', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('DBC', start=today - timedelta(days=364),end = today)['Close']),2)
+
+BIL_12_average = round(web.get_data_yahoo('BIL', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('BIL', start=today - timedelta(days=364),end = today)['Close']),2)
+
+IEF_12_average = round(web.get_data_yahoo('IEF', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('IEF', start=today - timedelta(days=364),end = today)['Close']),2)
+
+TLT_12_average = round(web.get_data_yahoo('TLT', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('TLT', start=today - timedelta(days=364),end = today)['Close']),2)
+
+LQD_12_average = round(web.get_data_yahoo('LQD', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('LQD', start=today - timedelta(days=364),end = today)['Close']),2)
+
+BND_12_average = round(web.get_data_yahoo('BND', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('BND', start=today - timedelta(days=364),end = today)['Close']),2)
+
 #자산군
 #카나리아 자산군
 canary_universe = [SPY_momentum_score, VEA_momentum_score, VWO_momentum_score, BND_momentum_score ]
 #공격자산
 offensive_universe = [VEA_momentum_score, VWO_momentum_score, BND_momentum_score,QQQ_momentum_score ]
+#안전 자산
+defensive_universe = [TIP_12_average, DBC_12_average, BIL_12_average, IEF_12_average, TLT_12_average, LQD_12_average, BND_12_average]
 
 #카나리아 자산군 모멘텀 스코어 확인
 if SPY_momentum_score > 0 and VEA_momentum_score > 0 and VWO_momentum_score >0 and BND_momentum_score > 0:
@@ -72,3 +89,13 @@ if SPY_momentum_score > 0 and VEA_momentum_score > 0 and VWO_momentum_score >0 a
     print(f'VWO - {VWO_momentum_score}')
 else:
   print('nooo')
+
+
+''' 나중에 위로 올리기, defensive universe list도 average_percent로 바꿔야함, 맨 마지막에 모멘텀 스코어 확인 하는 것에 넣기
+TIP_12_average_percent = price("tip", today) / TIP_12_average
+
+defensive_universe.sort()
+a = max(defensive_universe)
+b = defensive_universe[-2]
+c = defensive_universe[-3]
+'''
