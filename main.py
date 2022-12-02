@@ -86,16 +86,22 @@ offensive_universe = [VEA_momentum_score, VWO_momentum_score, BND_momentum_score
 #안전 자산
 defensive_universe = [TIP_12_average_percent, DBC_12_average_percent, BIL_12_average_percent, IEF_12_average_percent, TLT_12_average_percent, LQD_12_average_percent, BND_12_average_percent]
 
+money = int(input('how much money do you want to invest?'))
+
 #카나리아 자산군 모멘텀 스코어 확인
 if SPY_momentum_score > 0 and VEA_momentum_score > 0 and VWO_momentum_score >0 and BND_momentum_score > 0:
   if max(offensive_universe) == QQQ_momentum_score:
     print(f'QQQ - {QQQ_momentum_score}')
+    print(f'you should buy {int((money/3) / price("qqq",today))} stocks')
   elif max(offensive_universe) == BND_momentum_score:
     print(f'BND - {BND_momentum_score}')
+    print(f'you should buy {int((money/3) / price("bnd",today))} stocks')
   elif max(offensive_universe) == VEA_momentum_score:
     print(f'VEA - {VEA_momentum_score}')
+    print(f'you should buy {int((money/3) / price("vea",today))} stocks')
   elif max(offensive_universe) == VWO_momentum_score:
     print(f'VWO - {VWO_momentum_score}')
+    print(f'you should buy {int((money/3) / price("vwo",today))} stocks')
 else:
   defensive_universe.sort()
   biggest = max(defensive_universe)
@@ -106,36 +112,43 @@ else:
   if biggest == TIP_12_average_percent:
     if biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'TIP - {TIP_12_average_percent}')
   elif biggest == DBC_12_average_percent:
     if biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'DBC - {DBC_12_average_percent}')
   elif biggest == BIL_12_average_percent:
     if biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'BIL - {BIL_12_average_percent}')
   elif biggest == IEF_12_average_percent:
     if biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'IEF - {IEF_12_average_percent}')
   elif biggest == TLT_12_average_percent:
     if biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'TLT - {TLT_12_average_percent}')
   elif biggest == LQD_12_average_percent:
     if biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'LQD - {LQD_12_average_percent}')
   elif biggest == BND_12_average_percent:
     if biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'BND - {BND_12_average_percent}')
 	
@@ -143,36 +156,43 @@ else:
   if second_biggest == TIP_12_average_percent:
     if second_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'TIP - {TIP_12_average_percent}')
   elif second_biggest == DBC_12_average_percent:
     if second_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'DBC - {DBC_12_average_percent}')
   elif second_biggest == BIL_12_average_percent:
     if second_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'BIL - {BIL_12_average_percent}')
   elif second_biggest == IEF_12_average_percent:
     if second_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'IEF - {IEF_12_average_percent}')
   elif second_biggest == TLT_12_average_percent:
     if second_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'TLT - {TLT_12_average_percent}')
   elif second_biggest == LQD_12_average_percent:
     if second_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'LQD - {LQD_12_average_percent}')
   elif second_biggest == BND_12_average_percent:
     if second_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'BND - {BND_12_average_percent}')
 
@@ -180,36 +200,43 @@ else:
   if third_biggest == TIP_12_average_percent:
     if third_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'TIP - {TIP_12_average_percent}')
   elif third_biggest == DBC_12_average_percent:
     if third_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'DBC - {DBC_12_average_percent}')
   elif third_biggest == BIL_12_average_percent:
     if third_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'BIL - {BIL_12_average_percent}')
   elif third_biggest == IEF_12_average_percent:
     if third_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'IEF - {IEF_12_average_percent}')
   elif third_biggest == TLT_12_average_percent:
     if third_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'TLT - {TLT_12_average_percent}')
   elif third_biggest == LQD_12_average_percent:
     if third_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'LQD - {LQD_12_average_percent}')
   elif third_biggest == BND_12_average_percent:
     if third_biggest < 1:
       print("CASH")
+      print(f'you should keep ${money/3}')
     else:
       print(f'BND - {BND_12_average_percent}')
 
