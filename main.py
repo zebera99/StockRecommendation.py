@@ -69,7 +69,10 @@ LQD_12_average = round(web.get_data_yahoo('LQD', start=today - timedelta(days=36
 
 BND_12_average = round(web.get_data_yahoo('BND', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('BND', start=today - timedelta(days=364),end = today)['Close']),2)
 
+SPY_12_average = round(web.get_data_yahoo('SPY', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('SPY', start=today - timedelta(days=364),end = today)['Close']),2)
+
 #현재가 / 12개월 평균
+#BAA
 TIP_12_average_percent = round(price("tip", today) / TIP_12_average,2)
 DBC_12_average_percent = round(price("dbc", today) / DBC_12_average,2)
 BIL_12_average_percent = round(price("bil", today) / BIL_12_average,2)
@@ -77,6 +80,8 @@ IEF_12_average_percent = round(price("ief", today) / IEF_12_average,2)
 TLT_12_average_percent = round(price("tlt", today) / TLT_12_average,2)
 LQD_12_average_percent = round(price("lqd", today) / LQD_12_average,2)
 BND_12_average_percent = round(price("bnd", today) / BND_12_average,2)
+
+
 
 #자산군
 #카나리아 자산군
@@ -86,161 +91,185 @@ offensive_universe = [VEA_momentum_score, VWO_momentum_score, BND_momentum_score
 #안전 자산
 defensive_universe = [TIP_12_average_percent, DBC_12_average_percent, BIL_12_average_percent, IEF_12_average_percent, TLT_12_average_percent, LQD_12_average_percent, BND_12_average_percent]
 
-money = int(input('how much money do you want to invest?'))
+total_money = int(input('How much money do you want to invest? '))
+BAA_money = float(format(total_money/3, '.2f'))
+#BAA
+print('BAA Aggressive:')
 
 #카나리아 자산군 모멘텀 스코어 확인
 if SPY_momentum_score > 0 and VEA_momentum_score > 0 and VWO_momentum_score >0 and BND_momentum_score > 0:
   if max(offensive_universe) == QQQ_momentum_score:
     print(f'QQQ - {QQQ_momentum_score}')
-    print(f'you should buy {int((money/3) / price("qqq",today))} stocks')
+    print(f'You should buy {int((BAA_money) / price("qqq",today))} QQQ stocks')
   elif max(offensive_universe) == BND_momentum_score:
     print(f'BND - {BND_momentum_score}')
-    print(f'you should buy {int((money/3) / price("bnd",today))} stocks')
+    print(f'You should buy {int((BAA_money) / price("bnd",today))} BND stocks')
   elif max(offensive_universe) == VEA_momentum_score:
     print(f'VEA - {VEA_momentum_score}')
-    print(f'you should buy {int((money/3) / price("vea",today))} stocks')
+    print(f'You should buy {int((BAA_money) / price("vea",today))} VEA stocks')
   elif max(offensive_universe) == VWO_momentum_score:
     print(f'VWO - {VWO_momentum_score}')
-    print(f'you should buy {int((money/3) / price("vwo",today))} stocks')
+    print(f'You should buy {int((BAA_money) / price("vwo",today))} VWO stocks')
 else:
   defensive_universe.sort()
   biggest = max(defensive_universe)
   second_biggest = defensive_universe[-2]
   third_biggest = defensive_universe[-3]
 	
-  print("첫 번째 자산")
   if biggest == TIP_12_average_percent:
     if biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'You should keep ${BAA_money/3: .2f}')
     else:
       print(f'TIP - {TIP_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("tip",today))} TIP stocks')
   elif biggest == DBC_12_average_percent:
     if biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'DBC - {DBC_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("dbc",today))} DBC stocks')
   elif biggest == BIL_12_average_percent:
     if biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'BIL - {BIL_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("bil",today))} BIL stocks')
   elif biggest == IEF_12_average_percent:
     if biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'IEF - {IEF_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("ief",today))} IEF stocks')
   elif biggest == TLT_12_average_percent:
     if biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'TLT - {TLT_12_average_percent}')
   elif biggest == LQD_12_average_percent:
     if biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'LQD - {LQD_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("lqd",today))} LQD stocks')
   elif biggest == BND_12_average_percent:
     if biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'BND - {BND_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("bnd",today))} BND stocks')
 	
-  print("2번")
   if second_biggest == TIP_12_average_percent:
     if second_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'TIP - {TIP_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("tip",today))} TIP stocks')
   elif second_biggest == DBC_12_average_percent:
     if second_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'DBC - {DBC_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("dbc",today))} DBC stocks')
   elif second_biggest == BIL_12_average_percent:
     if second_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'BIL - {BIL_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("bil",today))} BIL stocks')
   elif second_biggest == IEF_12_average_percent:
     if second_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'IEF - {IEF_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("ief",today))} IEF stocks')
   elif second_biggest == TLT_12_average_percent:
     if second_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'TLT - {TLT_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("tlt",today))} TLT stocks')
   elif second_biggest == LQD_12_average_percent:
     if second_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'LQD - {LQD_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("lqd",today))} LQD stocks')
   elif second_biggest == BND_12_average_percent:
     if second_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'BND - {BND_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("bnd",today))} BND stocks')
 
-  print('3번')
   if third_biggest == TIP_12_average_percent:
     if third_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'TIP - {TIP_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("tip",today))} TIP stocks')
   elif third_biggest == DBC_12_average_percent:
     if third_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'DBC - {DBC_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("dbc",today))} DBC stocks')
   elif third_biggest == BIL_12_average_percent:
     if third_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'BIL - {BIL_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("bil",today))} BIL stocks')
   elif third_biggest == IEF_12_average_percent:
     if third_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'IEF - {IEF_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("ief",today))} IEF stocks')
   elif third_biggest == TLT_12_average_percent:
     if third_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'TLT - {TLT_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("tlt",today))} TLT stocks')
   elif third_biggest == LQD_12_average_percent:
     if third_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'LQD - {LQD_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("lqd",today))} LQD stocks')
   elif third_biggest == BND_12_average_percent:
     if third_biggest < 1:
       print("CASH")
-      print(f'you should keep ${money/3}')
+      print(f'you should keep ${BAA_money/3: .2f}')
     else:
       print(f'BND - {BND_12_average_percent}')
+      print(f'You should buy {int((BAA_money/3) / price("bnd",today))} BND stocks')
 
 
+#변형 듀얼 모멘텀 transformed dual momentum
+print("DUAL MOMENTUM")
 
+print(SPY_profit12)
+print()
 
-
+#마지막에는 총 주식 몇주, 현금 얼마 들고있을지 출력하는 것 만들기
