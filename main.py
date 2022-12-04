@@ -2,9 +2,19 @@ import pandas_datareader.data as web
 from datetime import timedelta
 from datetime import date
 from dateutil.relativedelta import relativedelta
+import datetime
 
-
+weekno = datetime.datetime.today().weekday()
 today = date.today()
+
+if weekno < 5:
+  print ("Weekday")
+elif weekno == 5:  # 5 Sat, 6 Sun
+  print ("Saturday")
+  today -= timedelta(days=1)
+elif weekno == 6:
+  print('SUnday')
+  today -= timedelta(days=2)
 
 SPY_year = web.get_data_yahoo('SPY', start=today - timedelta(days=364),end = today)
 
@@ -53,6 +63,12 @@ QQQ_profit3 = profit(price('qqq',today), price('qqq',mo(3)))
 QQQ_profit6 = profit(price('qqq',today), price('qqq',mo(6)))
 QQQ_profit12 = profit(price('qqq',today), price('qqq',mo(12)))
 QQQ_momentum_score = round((QQQ_profit1*12 + QQQ_profit3*4 + QQQ_profit6*2 + QQQ_profit12)/100,3)
+
+EFA_profit1 = profit(price('efa',today), price('efa',mo(1)))
+EFA_profit3 = profit(price('efa',today), price('efa',mo(3)))
+EFA_profit6 = profit(price('efa',today), price('efa',mo(6)))
+EFA_profit12 = profit(price('efa',today), price('efa',mo(12)))
+EFA_momentum_score = round((EFA_profit1*12 + EFA_profit3*4 + EFA_profit6*2 + EFA_profit12)/100,3)
 
 #안전 자산(12개월 평균가)
 TIP_12_average = round(web.get_data_yahoo('TIP', start=today - timedelta(days=364),end = today)['Close'].sum()/len(web.get_data_yahoo('TIP', start=today - timedelta(days=364),end = today)['Close']),2)
@@ -265,11 +281,16 @@ else:
       print(f'BND - {BND_12_average_percent}')
       print(f'You should buy {int((BAA_money/3) / price("bnd",today))} BND stocks')
 
-
+'''
 #변형 듀얼 모멘텀 transformed dual momentum
-print("DUAL MOMENTUM")
+if SPY_profit12 > 0:
+  if max(SPY_profit12, EFA_profit12) == SPY_profit12:
+    print('SPY')
+  else:
+    print('EFA')
+else:
+  print('nooooo')
 
-print(SPY_profit12)
-print()
 
 #마지막에는 총 주식 몇주, 현금 얼마 들고있을지 출력하는 것 만들기
+'''
