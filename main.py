@@ -3,7 +3,9 @@ from datetime import timedelta
 from datetime import date
 from dateutil.relativedelta import relativedelta
 import datetime
+import time
 
+start_time = time.time()
 weekno = datetime.datetime.today().weekday()
 today = date.today()
 
@@ -185,7 +187,7 @@ else:
   second_biggest = defensive_universe[-2]
   third_biggest = defensive_universe[-3]
   count = 0
-	
+
   if biggest == TIP_12_average_percent:
     if biggest < 1:
       count += 1
@@ -314,26 +316,27 @@ else:
       print(f'BND - {BND_12_average_percent}')
       print(f'You should buy {int((BAA_money/3) / price("bnd",today))} BND stocks')
 
-cash =  float(format(BAA_money/3, '.2f'))
-print(f'you should keep ${cash * count}')
+  cash =  float(format(BAA_money/3, '.2f'))
+  print(f'you should keep ${cash * count}')
+
 
 
 #변형 듀얼 모멘텀 transformed dual momentum
 
 #dual momentum
 print('dual momentum:')
+
 if SPY_profit12 > 0:
   if max(SPY_profit12, EFA_profit12) == SPY_profit12:
     print('SPY')
   else:
     print('EFA')
 else:
-  print('nooooo')
+  count = 0
   dual_momentum_defensive_universe.sort()
   biggest = max(dual_momentum_defensive_universe)
   second_biggest = dual_momentum_defensive_universe[-2]
   third_biggest = dual_momentum_defensive_universe[-3]
-  count = 0
   
   if biggest == SHY_profit12:
     if biggest < 0:
@@ -482,8 +485,9 @@ else:
       print(f'EMB - {EMB_profit12}')
       print(f'You should buy {int((dual_momentum_money/3) / price("emb",today))} EMB stocks')
 
-cash =  float(format(dual_momentum_money/3, '.2f'))
-print(f'you should keep ${cash * count}')
+  cash =  float(format(dual_momentum_money/3, '.2f'))
+  print(f'you should keep ${cash * count}')
 #마지막에는 총 주식 몇주, 현금 얼마 들고있을지 출력하는 것 만들기
 # 현금 총 얼마? 
 
+print("--- %s seconds ---" % (time.time() - start_time))
