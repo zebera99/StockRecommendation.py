@@ -207,18 +207,10 @@ print('BAA Aggressive:')
 
 #카나리아 자산군 모멘텀 스코어 확인
 if SPY_momentum_score > 0 and VEA_momentum_score > 0 and VWO_momentum_score >0 and BND_momentum_score > 0:
-  if max(offensive_universe) == QQQ_momentum_score:
-    print(f'QQQ - {QQQ_momentum_score}')
-    print(f'You should buy {int((BAA_money) / price("qqq",today))} QQQ stocks')
-  elif max(offensive_universe) == BND_momentum_score:
-    print(f'BND - {BND_momentum_score}')
-    print(f'You should buy {int((BAA_money) / price("bnd",today))} BND stocks')
-  elif max(offensive_universe) == VEA_momentum_score:
-    print(f'VEA - {VEA_momentum_score}')
-    print(f'You should buy {int((BAA_money) / price("vea",today))} VEA stocks')
-  elif max(offensive_universe) == VWO_momentum_score:
-    print(f'VWO - {VWO_momentum_score}')
-    print(f'You should buy {int((BAA_money) / price("vwo",today))} VWO stocks')
+    buy = max(offensive_universe, key=offensive_universe.get)
+    print(f'You should buy {int((BAA_money) / price(buy,today))} {buy} stocks')
+    
+  
 else:
   defensive_universe.sort()
   biggest = max(defensive_universe)
